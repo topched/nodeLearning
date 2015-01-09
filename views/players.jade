@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  p Fake Town Minor Hockey
+
+  h2 Add Player
+  #addPlayer
+    label First Name: 
+    input#playerFirstName(type='text')
+    br
+    label Last Name: 
+    input#playerLastName(type='text')
+    br
+    label DOB:
+    input#playerDOB(type='date')
+    br
+    button#btnAddPlayer Add Player
+
+  hr
+
+  h2 Player List
+  #playerList
+    table
+      thead
+        th First Name
+        th Last Name
+        th DOB
+        th Delete?
+      tbody
+
+

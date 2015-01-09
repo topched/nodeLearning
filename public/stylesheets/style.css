@@ -13,7 +13,7 @@ a {
 
 #wrapper {
 	padding-left:312px;
-	position:relative;
+
 }
 
 #playerList {
@@ -51,6 +51,10 @@ a {
 		border:1px solid #CCC;
 		background:rgba(80,120,255,0.05);
 	}
+
+#btnAddPlayer {
+	margin-top: 2em;
+}
 
 fieldset {
 	border:0;
