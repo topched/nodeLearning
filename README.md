@@ -12,6 +12,7 @@ Project for learning node.js
 * Create new user when creating a player and link the collections
 * Create player page
 * Create teams and link players
+* Add more fields to the player model 
 * (more to come)
 
 
