@@ -1,62 +1,31 @@
-body {
-  padding: 30px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#navheader {
+	color: white;
+	margin-left: 10px;
 }
 
-h2 {
-	margin:0 0 .5em 0;
+#logout {
+	margin-right: 15px;
+	color: white;
 }
 
-a {
-  color: #00B7FF;
+.nav-pills {
+	padding-right: 5px;
 }
 
-#wrapper {
-	padding-left:312px;
-
+.nav-sidebar { 
+    width: 100%;
+    padding: 30px 0; 
+    border-right: 1px solid #ddd;
 }
 
-#playerList {
-	margin:0 0 30px 0;
-}
-	#playerList table {
-		border-collapse:separate;
-		border-spacing:1px;
-		background:#CCC;
-	}
-		#playerList table th {
-			background:#EEE;
-			font-weight:600;
-			padding:10px 20px;
-			text-align:center;
-		}
-		#playerList table tbody {
-			padding:0; margin:0;
-			border-collapse:collapse;
-			border-spacing:0px;
-		}
-			#playerList table td {
-				background:#FFF;
-				padding:5px 10px;
-				text-align:center;
-			}
-
-#userInfo {
-	width:250px;
-	position:absolute;
-	top:0; left:0;
-}
-	#userInfo p {
-		padding:15px;
-		border:1px solid #CCC;
-		background:rgba(80,120,255,0.05);
-	}
-
-#btnAddPlayer {
-	margin-top: 2em;
+.hidden {
+	display: none;
 }
 
-fieldset {
-	border:0;
-	padding:0; margin:0;
+.inputForm {
+	margin-bottom: 5px;
+}
+
+label {
+	margin-right: 5px;
 }
