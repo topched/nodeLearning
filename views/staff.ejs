@@ -109,7 +109,14 @@
 				</thead>
 				<tbody>
 
-					<!-- populate through ajax call -->
+					<% for(var i=0; i<players.length; i++) {%>
+						<tr> 
+							<td><%= players[i].username %></td>
+							<td><%= players[i].firstname %></td>
+							<td><%= players[i].lastname %></td>
+							<td><%= formatDate(players[i].birthdate) %></td>
+						</tr>
+					<%}%>
 
 
 				</tbody>

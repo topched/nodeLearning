@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 var moment = require('moment');
-
+var ejs = require('ejs');
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -39,6 +39,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+//function to use moment to format the date
+app.locals.formatDate = function(date) {
+	return moment(date).format('MMMM Do YYYY');
+}
 
 //load routes + pass in app, passport, moment
 require('./app/routes')(app, passport, moment);

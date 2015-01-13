@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
     // Populate the user table on initial page load
-    populateTable();
+    //populateTable();
 
 });
 
@@ -38,32 +38,8 @@ function showAllPlayers(event) {
     //show all players
     $('#showViewAllPlayers').removeClass('hidden');
 
+
 }
-
-// Fill table with data
-function populateTable() {
-
-    // Empty content string
-    var tableContent = '';
-
-    $.getJSON( '/players/playerlist', function( data ) {
-
-        // For each item in our JSON, add a table row and cells to the content string
-        $.each(data, function(){
-
-            tableContent += '<tr>';
-            tableContent += '<td>' + this.username + '</td>';//put username here once that part is done
-            tableContent += '<td>' + this.firstname + '</td>';
-            tableContent += '<td>' + this.lastname + '</td>';
-            tableContent += '<td>' + this.birthdate + '</td>';
-            tableContent += '</tr>';
-
-        });
-
-        // Inject the whole content string into our existing HTML table
-        $('#playerList table tbody').html(tableContent);
-    });
-};
 
 function validatePlayerAddForm() {
 

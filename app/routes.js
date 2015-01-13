@@ -18,17 +18,26 @@ module.exports = function(app, passport, moment){
 
 	//staff section
 	app.get('/staff', isLoggedIn, isStaff, function(req, res) {
-		res.render('staff.ejs', {
+		Player
+		.find({})
+		.exec(function (err, players) {
+
+			res.render('staff.ejs', {
 			user: req.user,
+			players: players,
 			message: req.flash('createMessage') 
-		});
+			});
+			
+		})
 	});
 
 	//player section
 	app.get('/player', isLoggedIn, function(req, res) {
+
 		res.render('player.ejs', {
 			user: req.user
 		});
+
 	});
 
 	//logout
@@ -54,16 +63,6 @@ module.exports = function(app, passport, moment){
 		Player
 		.find({})
 		.exec(function (err, players) {
-
-			var p;
-			//use moment to format date for human readable
-			//?? How come  I cant change these values in transit ??
-			//TODO figure this out or else do in template file 
-			for(p in players){
-				players[p].dateFormat = moment(players[p].birthdate).format('MMMM Do YYYY');
-
-			}
-
 			res.json(players);
 		})
 
