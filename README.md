@@ -24,6 +24,7 @@ Project for learning node.js
 * Add more fields to the player model
 * Format birthdate so its more human-friendly
 * automate initially creating admin user
+* Make the connect-flash message only show for a brief period of time
 * (more to come)
 
 
