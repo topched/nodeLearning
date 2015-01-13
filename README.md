@@ -8,7 +8,7 @@ Project for learning node.js
 * Manually create a admin user(TODO: automate this process)
 *   1. Uncomment signup link in index.js
 *   2. Start app with node app.js then navigate to localhost:8080 
-*   3. Fill in form and create user
+*   3. Fill in form and create user(NOTE: this will create an undefined player. Will be fixed when the TODO above is complete)
 *   4. Start mongo(From wherever you have mongo installed)
 *   5. Switch to nodeLearning
 *   6. Find the user you created in the users collection
