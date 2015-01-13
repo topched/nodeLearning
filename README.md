@@ -17,7 +17,7 @@ Project for learning node.js
 *   9. Restart the app and you will be able to log in with admin credentials
 
 
-#TODO
+## TODO
 * Create new user when creating a player and link the collections
 * Create player page
 * Create teams and link players
