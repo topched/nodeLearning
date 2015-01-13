@@ -48,13 +48,11 @@ function populateTable() {
 
     $.getJSON( '/players/playerlist', function( data ) {
 
-        //alert(data.length);
-
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
 
             tableContent += '<tr>';
-            tableContent += '<td> </td>'//put username here once that part is done
+            tableContent += '<td>' + this.username + '</td>';//put username here once that part is done
             tableContent += '<td>' + this.firstname + '</td>';
             tableContent += '<td>' + this.lastname + '</td>';
             tableContent += '<td>' + this.birthdate + '</td>';

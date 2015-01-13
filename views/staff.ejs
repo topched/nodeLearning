@@ -30,7 +30,6 @@
 
 </div>
 
-<div class="container">
 
 	<div class="col-sm-3">
 		<nav class="nav-sidebar">
@@ -41,39 +40,50 @@
 		</nav>
 	</div>
 
-
 	<!-- div for the form to add players -->		
 	<div class="col-sm-9 hidden" id="showAddPlayerForm">
 		<form class="form-horizontal" id="addPlayer" onsubmit="return validatePlayerAddForm()" action="/staff/createplayer" method="post">
 
 			<div class="form-group">
-				<label>Username</label>
-				<input class="inputForm" type="text" name="username">	
+				<label class="control-label col-sm-3" for="username">Username</label>
+				<div class="col-sm-8">
+					<input class="form-control inputForm" type="text" name="username">
+				</div>	
 			</div>
 
 			<div class="form-group">
-				<label>Password</label>	
-				<input class="inputForm" type="text" name="password">
+				<label class="control-label col-sm-3" for="password">Password</label>
+				<div class="col-sm-8">
+					<input class="form-control inputForm" type="text" name="password">
+				</div>
 			</div>
 
 			<hr>
 
 			<div class="form-group">
-				<label>First Name</label>	
-				<input class="inputForm" type="text" name="playerFirstName">
+				<label class="control-label col-sm-3" for="playerFirstName">First Name</label>
+				<div class="col-sm-8">	
+					<input class="form-control inputForm" type="text" name="playerFirstName">
+				</div>
 			</div>
 
 			<div class="form-group">
-				<label>Last Name</label>
-				<input class="inputForm" type="text" name="playerLastName">
+				<label class="control-label col-sm-3" for="playerLastName">Last Name</label>
+				<div class="col-sm-8">
+					<input class="form-control inputForm" type="text" name="playerLastName">
+				</div>
 			</div>
 
 			<div class="form-group">
-				<label>Birth Date</label>
-				<input class="inputForm" type="date" name="playerBirthDate">
+				<label class="control-label col-sm-3" for="playerBirthDate">Date Of Birth</label>
+				<div class="col-sm-4">
+					<input class="form-control inputForm" type="date" name="playerBirthDate">
+				</div>
 			</div>
 
-			<button type="submit" class="btn btn-success">Create Player</button>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-success btn-large">Create Player</button>
+			</div>
 
 		</form>
 
@@ -109,7 +119,7 @@
 
 	
 
-</div>
+
 
 
 </body>

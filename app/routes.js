@@ -2,7 +2,7 @@
 var Player = require('../app/models/player');
 var User       = require('../app/models/user');
 
-module.exports = function(app, passport){
+module.exports = function(app, passport, moment){
 
 	//home page with login links
 	app.get('/', function(req, res) {
@@ -37,28 +37,36 @@ module.exports = function(app, passport){
 		res.redirect('/');
 	});
 
-
+	//POST to create a player. Must be loogedIn and Staff
 	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
 
 		passport.authenticate('local-signup', {
-			successRedirect : '/staff', // redirect to the secure profile section
-			//failureRedirect : '/staff', // redirect back to the signup page if there is an error
-			failureFlash : true // allow flash messages
+			successRedirect : '/staff', 
+			failureRedirect : '/staff', 
+			failureFlash : true 
 		})(req, res);
 	});
-
 
 
 	//retrive JSON representation of all the players
 	app.get('/players/playerlist', isLoggedIn, function(req, res) {
 
-		//find all the players and exec the query
-		var q = Player.find({});
-		q.exec(function(err, players){
+		Player
+		.find({})
+		.exec(function (err, players) {
 
-			//console.log("Player %s", players.length);
+			var p;
+			//use moment to format date for human readable
+			//?? How come  I cant change these values in transit ??
+			//TODO figure this out or else do in template file 
+			for(p in players){
+				players[p].dateFormat = moment(players[p].birthdate).format('MMMM Do YYYY');
+
+			}
+
 			res.json(players);
-		});
+		})
+
 	});
 
 
@@ -103,7 +111,12 @@ module.exports = function(app, passport){
 		failureFlash : true // allow flash messages
 	}));
 
+	//no matching urls
+	app.use(function(req, res) {
+		//redirect to staff because it will fall through to '/' if the user checks fail
+		res.redirect('/staff');
 
+	});
 
 };
 

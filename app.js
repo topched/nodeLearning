@@ -5,6 +5,7 @@ var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
+var moment = require('moment');
 
 
 var morgan = require('morgan');
@@ -17,7 +18,7 @@ var session = require('express-session');
 mongoose.connect('mongodb://localhost:27017/nodeLearning');
 
 //configure passport
-require('./config/passport')(passport);
+require('./config/passport')(passport, moment);
 
 
 // template engine setup
@@ -39,8 +40,8 @@ app.use(passport.session());
 app.use(flash());
 
 
-//load routes + pass in app and passport
-require('./app/routes')(app, passport);
+//load routes + pass in app, passport, moment
+require('./app/routes')(app, passport, moment);
 
 
 //TODO: add in proper error handlers

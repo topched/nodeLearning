@@ -5,7 +5,7 @@ var Player = require('../app/models/player');
 
 
 
-module.exports = function(passport) {
+module.exports = function(passport, moment) {
 
     // =========================================================================
     // passport session setup ==================================================
@@ -104,7 +104,11 @@ module.exports = function(passport) {
                 newPlayer.firstname = req.body.playerFirstName;
                 newPlayer.lastname = req.body.playerLastName;
                 newPlayer.birthdate = req.body.playerBirthDate;
+                //newPlayer.birthdate = moment(req.body.playerBirthdate).format('MMMM Do YYYY');
+
+                //link to the players user profile
                 newPlayer.userId = newUser._id;
+                newPlayer.username = username;
 
                 console.log(newUser._id);
 
