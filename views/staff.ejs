@@ -4,7 +4,7 @@
 	<title>Node Authentication</title>
 
 	<% include headerLinks.ejs %>
-	
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
@@ -39,80 +39,77 @@
 				<li id="navAddPlayer" onclick="showAddPlayer()"><a>Add New Player</a></li>
 			</ul>
 		</nav>
-
 	</div>
 
 
+	<!-- div for the form to add players -->		
+	<div class="col-sm-9 hidden" id="showAddPlayerForm">
+		<form class="form-horizontal" id="addPlayer" onsubmit="return validatePlayerAddForm()" action="/staff/createplayer" method="post">
 
-
-
-
-		<!-- div for the form to add players -->		
-		<div class="col-sm-9 hidden" id="showAddPlayerForm">
-			<form class="form-horizontal" id="addPlayer">
-
-				<div class="input-group">
-					<label>Username</label>
-					<input class="inputForm" type="text" class="input-xlarge" id="playerUsername">	
-				</div>
-
-				<div class="input-group">
-					<label>Password</label>	
-					<input class="inputForm" type="text" class="input-xlarge" id="playerTempPassword">
-				</div>
-
-				<hr>
-
-				<div class="input-group">
-					<label>First Name</label>	
-					<input class="inputForm" type="text" class="input-xlarge" id="playerFirstName">
-				</div>
-
-				<div class="input-group">
-					<label>Last Name</label>
-					<input class="inputForm" type="text" class="input-xlarge" id="playerLastName">
-				</div>
-
-				<div class="input-group">
-					<label>Birth Date</label>
-					<input class="inputForm" type="date" class="input-xlarge" id="playerBirthDate">
-				</div>
-
-			</form>
-
-			<button class="btn btn-success" onclick="addPlayer()">Create Player</button>
-
-		</div>
-
-		<!-- div to show all the players -->
-		<div class="col-sm-9" id="showViewAllPlayers">
-			<div class="playerList" id="playerList">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Birth Date</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<!-- populate through ajax call -->
-
-
-					</tbody>
-				</table>
+			<div class="form-group">
+				<label>Username</label>
+				<input class="inputForm" type="text" name="username">	
 			</div>
+
+			<div class="form-group">
+				<label>Password</label>	
+				<input class="inputForm" type="text" name="password">
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<label>First Name</label>	
+				<input class="inputForm" type="text" name="playerFirstName">
+			</div>
+
+			<div class="form-group">
+				<label>Last Name</label>
+				<input class="inputForm" type="text" name="playerLastName">
+			</div>
+
+			<div class="form-group">
+				<label>Birth Date</label>
+				<input class="inputForm" type="date" name="playerBirthDate">
+			</div>
+
+			<button type="submit" class="btn btn-success">Create Player</button>
+
+		</form>
+
+	</div>
+
+	<!-- div to show all the players -->
+	<div class="col-sm-9" id="showViewAllPlayers">
+
+		<!-- TODO make dissapear after a small time period -->
+		<% if (message.length > 0) { %>
+			<div class="alert alert-danger"><%= message %></div>
+		<% } %>
+	
+		<div class="playerList" id="playerList">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Birth Date</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<!-- populate through ajax call -->
+
+
+				</tbody>
+			</table>
 		</div>
+	</div>
 
 	
 
 </div>
-
-
-
-
-
 
 
 </body>

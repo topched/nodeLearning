@@ -38,7 +38,6 @@ function showAllPlayers(event) {
     //show all players
     $('#showViewAllPlayers').removeClass('hidden');
 
-    populateTable();
 }
 
 // Fill table with data
@@ -55,6 +54,7 @@ function populateTable() {
         $.each(data, function(){
 
             tableContent += '<tr>';
+            tableContent += '<td> </td>'//put username here once that part is done
             tableContent += '<td>' + this.firstname + '</td>';
             tableContent += '<td>' + this.lastname + '</td>';
             tableContent += '<td>' + this.birthdate + '</td>';
@@ -62,61 +62,23 @@ function populateTable() {
 
         });
 
-        console.log(tableContent);
-
         // Inject the whole content string into our existing HTML table
         $('#playerList table tbody').html(tableContent);
     });
 };
 
+function validatePlayerAddForm() {
 
-//add player to the collection
-function addPlayer(event) {
-
-    //basic form validation
     var errCnt = 0;
     $('#addPlayer input').each(function(index, val) {
         if($(this).val() === '') {errCnt++;}
     });
 
-    //error free
-    if(errCnt === 0) {
-
-        //create a new player
-        var newPlayer = {
-            'firstname': $('#addPlayer input#playerFirstName').val(),
-            'lastname' : $('#addPlayer input#playerLastName').val(),
-            'birthdate' : $('#addPlayer input#playerBirthDate').val()
-        }
-
-        //ajax POST
-        $.ajax({
-            type: 'POST',
-            data: newPlayer,
-            url: 'staff/createplayer',
-            dataType: 'JSON'
-        }).done(function(resp) {
-
-            if(resp.msg === ''){
-
-                //clear input form and show all players
-                $('#addPlayer input').val('');
-                showAllPlayers();
-
-            }else{
-
-                //something went wrong
-                alert('Error: ' + resp.msg);
-            }
-        });
-    }else{
-
-        //error filling in the form
-        alert('Please fill in all the fields');
+    if(errCnt > 0) {
+        alert("Please fill in all fields");
         return false;
     }
-};
-
+}
 
 //remove player from the collection
 function removePlayer(event){

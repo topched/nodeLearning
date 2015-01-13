@@ -19,7 +19,8 @@ module.exports = function(app, passport){
 	//staff section
 	app.get('/staff', isLoggedIn, function(req, res) {
 		res.render('staff.ejs', {
-			user: req.user
+			user: req.user,
+			message: req.flash('createMessage') 
 		});
 	});
 
@@ -36,24 +37,17 @@ module.exports = function(app, passport){
 		res.redirect('/');
 	});
 
-	//create a new player
-	app.post('/staff/createplayer', isLoggedIn, function(req, res) {
 
-		var newPlayer = new Player();
-		
-		newPlayer.firstname = req.body.firstname;
-		newPlayer.lastname = req.body.lastname;
-		newPlayer.birthdate = req.body.birthdate;
+	app.post('/staff/createplayer', isLoggedIn, function(req, res){
 
-		//console.log('%s %s %s', newPlayer.firstname, newPlayer.lastname, newPlayer.birthdate);
-
-		newPlayer.save(function (err) {
-
-			res.send((err == null) ? {msg:''} : {msg:err});
-
-		});
-
+		passport.authenticate('local-signup', {
+			successRedirect : '/staff', // redirect to the secure profile section
+			failureRedirect : '/staff', // redirect back to the signup page if there is an error
+			failureFlash : true // allow flash messages
+		})(req, res);
 	});
+
+
 
 	//retrive JSON representation of all the players
 	app.get('/players/playerlist', isLoggedIn, function(req, res) {
@@ -65,9 +59,7 @@ module.exports = function(app, passport){
 			//console.log("Player %s", players.length);
 			res.json(players);
 		});
-
 	});
-
 
 
 	//==================================

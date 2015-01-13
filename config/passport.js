@@ -1,6 +1,7 @@
 var LocalStrategy = require('passport-local').Strategy;
 // load up the user model
 var User       = require('../app/models/user');
+var Player = require('../app/models/player');
 
 
 
@@ -57,6 +58,8 @@ module.exports = function(passport) {
 
     }));
 
+
+
     // =========================================================================
     // LOCAL SIGNUP ============================================================
     // =========================================================================
@@ -67,40 +70,47 @@ module.exports = function(passport) {
     },
     function(req, username, password, done) {
 
-        // asynchronous
-        process.nextTick(function() {
-            // if the user is not already logged in:
-            if (!req.user) {
-                User.findOne({ 'username' :  username }, function(err, user) {
-                    // if there are any errors, return the error
-                    if (err)
-                        return done(err);
+        console.log("creating user %s %s", username, password);
+        console.log("creating player %s %s", req.body.playerFirstName, req.body.playerLastName)
 
-                    // check to see if theres already a user with that username
-                    if (user) {
-                        return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
-                    } else {
+        User.findOne({ 'username': username}, function(err, user) {
 
-                        // create the user
-                        var newUser            = new User();
 
-                        newUser.username    = username;
-                        newUser.password = newUser.generateHash(password);
-                        //admin is set by default -- all users should be 'players' until changed
+            if (err) return done(err);
 
-                        newUser.save(function(err) {
-                            if (err)
-                                return done(err);
+            //check to see if that user exists
+            if(user) {
+                
+                return done(null, false, req.flash('createMessage', 'Username already exists'));
+            
+            }else{
 
-                            return done(null, newUser);
-                        });
-                    }
+                //create the new user first (cant have username collisions but OK with player names)
+                var newUser = new User();
+
+                newUser.username = username;
+                newUser.password = newUser.generateHash(password);
+                //admin is set by default -- all users should be 'players' until changed
+
+                newUser.save(function(err) {
+
+                    if(err) return done(err);
 
                 });
 
-            }  else {
-                // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
-                return done(null, req.user);
+                //create the new player
+                var newPlayer = new Player();
+
+                newPlayer.firstname = req.body.playerFirstName;
+                newPlayer.lastname = req.body.playerLastName;
+                newPlayer.birthdate = req.body.playerBirthDate;
+
+                newPlayer.save(function(err) {
+
+                    if(err) return done(err);
+                });
+
+                return done(null, newUser), req.flash('createMessage', 'Player Created');
             }
 
         });
