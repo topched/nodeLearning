@@ -104,13 +104,16 @@ module.exports = function(passport) {
                 newPlayer.firstname = req.body.playerFirstName;
                 newPlayer.lastname = req.body.playerLastName;
                 newPlayer.birthdate = req.body.playerBirthDate;
+                newPlayer.userId = newUser._id;
+
+                console.log(newUser._id);
 
                 newPlayer.save(function(err) {
 
                     if(err) return done(err);
                 });
 
-                return done(null, newUser), req.flash('createMessage', 'Player Created');
+                return done(null, req.user), req.flash('createMessage', 'Player Created');
             }
 
         });

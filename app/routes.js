@@ -1,6 +1,6 @@
 
 var Player = require('../app/models/player');
-//var User       = require('../app/models/user');
+var User       = require('../app/models/user');
 
 module.exports = function(app, passport){
 
@@ -17,7 +17,7 @@ module.exports = function(app, passport){
 	});
 
 	//staff section
-	app.get('/staff', isLoggedIn, function(req, res) {
+	app.get('/staff', isLoggedIn, isStaff, function(req, res) {
 		res.render('staff.ejs', {
 			user: req.user,
 			message: req.flash('createMessage') 
@@ -38,11 +38,11 @@ module.exports = function(app, passport){
 	});
 
 
-	app.post('/staff/createplayer', isLoggedIn, function(req, res){
+	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
 
 		passport.authenticate('local-signup', {
 			successRedirect : '/staff', // redirect to the secure profile section
-			failureRedirect : '/staff', // redirect back to the signup page if there is an error
+			//failureRedirect : '/staff', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		})(req, res);
 	});
@@ -113,4 +113,18 @@ function isLoggedIn(req, res, next) {
 		return next();
 
 	res.redirect('/');
+}
+
+// ensure the user is staff
+function isStaff(req, res, next) {
+
+	req.logIn(req.user, function(err) {
+
+		//console.log(req.user.admin);
+		if(req.user.admin === true){
+			return next();
+		}else{
+			return res.redirect('/');
+		}
+	});
 }
