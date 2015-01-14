@@ -23,6 +23,9 @@ Project for learning node.js
 * Add more fields to the player model
 * automate initially creating admin user
 * Make the connect-flash message only show for a brief period of time
+* Fix error between moment and the date object (Lose a day)
+* Add a way to update user information 
+* Add a way to change passwords
 * More robust error handling
 * (more to come)
 
