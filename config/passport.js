@@ -104,18 +104,18 @@ module.exports = function(passport, moment) {
                 newPlayer.firstname = req.body.playerFirstName;
                 newPlayer.lastname = req.body.playerLastName;
                 newPlayer.birthdate = req.body.playerBirthDate;
-                //newPlayer.birthdate = moment(req.body.playerBirthdate).format('MMMM Do YYYY');
 
                 //link to the players user profile
                 newPlayer.userId = newUser._id;
                 newPlayer.username = username;
 
-                console.log(newUser._id);
+                //console.log(newUser._id);
 
                 newPlayer.save(function(err) {
 
                     if(err) return done(err);
                 });
+
 
                 return done(null, req.user), req.flash('createMessage', 'Player Created');
             }

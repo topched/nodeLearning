@@ -9,28 +9,15 @@ module.exports = function(app, passport, moment){
 		res.render('index.ejs');
 	});
 
-	//profile section
-	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.ejs', {
-			user : req.user
-		});
-	});
-
-	//staff section
+	//GET staff home page
 	app.get('/staff', isLoggedIn, isStaff, function(req, res) {
 
-		Player
-		.find({})
-		.exec(function (err, players) {
-
-			res.render('staff.ejs', {
-			user: req.user,
-			path: req.route.path
-			});
+		res.render('staff.ejs', {
+		user: req.user,
+		path: req.route.path
+		});
 			
-		})
 	});
-
 
 	//POST to create a player. Must be loogedIn and Staff
 	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
@@ -41,31 +28,85 @@ module.exports = function(app, passport, moment){
 		})(req, res);
 	});
 
+	//GET create player page
 	app.get('/staff/createplayer', isLoggedIn, isStaff, function(req, res) {
-
 		res.render('createPlayer.ejs', {
 			user: req.user,
 			path: req.route.path
 		});
 	});
 
-	app.get('/staff/editplayer', isLoggedIn, isStaff, function(req, res) {
+	//GET edit player page for staff
+	app.get('/staff/editplayer/:userId', isLoggedIn, isStaff, function(req, res) {
 
-		res.render('editPlayer.ejs', {
-			user: req.user,
-			path: req.route.path
-		});
+		var userId = req.params.userId;
+
+		Player
+		.findOne({userId: userId})
+		.exec(function (err, player) {
+
+			//console.log(player);
+
+			res.render('editPlayer.ejs', {
+				user: req.user,
+				player: player,
+				path: req.route.path
+			});
+
+		})
+
 	})
+
+	app.post('/staff/editplayer', isLoggedIn, isStaff, function(req, res) {
+
+		console.log(req.body);
+		var playerId = req.body.playerId;
+
+		var tmpPlayer = new Player();
+		tmpPlayer.firstname = req.body.firstname;
+
+
+		Player
+		.findOne({_id: playerId})
+		.exec(function (err, player) {
+
+			//console.log(player);
+			//never want to update the id
+			//TODO: update the user stuff once thats implemented
+			player.firstname = req.body.playerFirstName;
+			player.lastname = req.body.playerLastName;
+			player.birthdate = req.body.playerBirthDate;
+
+			player.save(function(err) {
+
+				//TODO: handle the error properly
+				if(err) res.redirect('/staff');
+
+				res.redirect('/staff/playerlist');
+
+			});
+
+			
+		})
+
+
+
+	})
+
+	app.post('/staff/deletePlayer', isLoggedIn, isStaff, function(req, res) {
+
+		
+	});
 
 	app.get('/staff/playerlist', isLoggedIn, isStaff, function(req, res) {
 
-		console.log(req.route.path);
+		//console.log(req.route.path);
 
 		Player
 		.find({})
 		.exec(function (err, players) {
 
-			res.render('viewAllPlayers.ejs', {
+			res.render('playerList.ejs', {
 			user: req.user,
 			players: players,
 			path: req.route.path
@@ -74,7 +115,7 @@ module.exports = function(app, passport, moment){
 
 	});
 
-		//player section
+	//player section
 	app.get('/player', isLoggedIn, function(req, res) {
 
 		res.render('player.ejs', {
@@ -119,15 +160,15 @@ module.exports = function(app, passport, moment){
 	});
 
 
-	// show the signup form
+	//only used to initially create a user
 	app.get('/signup', function(req, res) {
 		res.render('signup.ejs', { message: req.flash('signupMessage') });
 	});
 
-	// process the signup form
+	//only used to initially create a user
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/player', // redirect to the secure profile section
-		failureRedirect : '/signup', // redirect back to the signup page if there is an error
+		successRedirect : '/player', 
+		failureRedirect : '/signup', 
 		failureFlash : true // allow flash messages
 	}));
 

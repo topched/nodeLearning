@@ -15,14 +15,16 @@
 	<div class="col-sm-9">
 
 
-		<form class="form-horizontal" id="addPlayer" onsubmit="return validatePlayerAddForm()" action="/staff/createplayer" method="post">
+		<form class="form-horizontal" id="addPlayer" onsubmit="return validatePlayerAddForm()" action="/staff/editplayer" method="post">
 
+			<!-- TODO: update username and password. Might want to do this another way
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="username">Username</label>
 				<div class="col-sm-8">
-					<input class="form-control inputForm" type="text" name="username">
+					<input class="form-control inputForm" type="text" name="username" value="<%= player.username %>">
 				</div>	
 			</div>
+
 
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="password">Password</label>
@@ -31,32 +33,34 @@
 				</div>
 			</div>
 
-			<hr>
+			<hr>-->
 
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="playerFirstName">First Name</label>
 				<div class="col-sm-8">	
-					<input class="form-control inputForm" type="text" name="playerFirstName">
+					<input class="form-control inputForm" type="text" name="playerFirstName" value="<%= player.firstname %>">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="playerLastName">Last Name</label>
 				<div class="col-sm-8">
-					<input class="form-control inputForm" type="text" name="playerLastName">
+					<input class="form-control inputForm" type="text" name="playerLastName" value="<%= player.lastname %>">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="playerBirthDate">Date Of Birth</label>
 				<div class="col-sm-4">
-					<input class="form-control inputForm" type="date" name="playerBirthDate">
+					<input class="form-control inputForm" type="date" name="playerBirthDate" value="<%= formatDateForForm(player.birthdate) %>">
 				</div>
 			</div>
 
+			<input type="hidden" name="playerId" value="<%= player._id %>">
+
 			<div class="form-actions">
 				<button type="submit" class="btn btn-success btn-large">Update Player</button>
-				<button class="btn btn-danger btn-large">Delete Player</button>
+				<button class="btn btn-danger btn-large">Cancel</button>
 			</div>
 
 		</form>

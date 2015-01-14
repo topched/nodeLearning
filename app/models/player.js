@@ -7,8 +7,8 @@ var playerSchema = mongoose.Schema({
 	firstname : String,
 	lastname : String,
 	birthdate : {type: Date},
-	userId : [{type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null}],
-	username : [{type: String, ref: 'User', default: null}] 
+	userId : {type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null},
+	username : {type: String, ref: 'User', default: null}
 });
 
 playerSchema.methods.updateField = function(field, data) {

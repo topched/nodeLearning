@@ -34,14 +34,14 @@
 							    <%= players[i].username %> <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">
-								<li><a href=""><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+								<li><a href="editplayer/<%= players[i].userId %>" ><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
 								<li><a href=""><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
 								</ul>
 							</div>						
 						</td>
 						<td><%= players[i].firstname %></td>
 						<td><%= players[i].lastname %></td>
-						<td><%= formatDate(players[i].birthdate) %></td>
+						<td><%= formatDateForHuman(players[i].birthdate) %></td>
 
 					</tr>
 				<%}%>
