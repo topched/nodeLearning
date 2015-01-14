@@ -22,7 +22,7 @@ module.exports = function(app, passport, moment){
 	//POST to create a player. Must be loogedIn and Staff
 	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
 		passport.authenticate('local-signup', {
-			successRedirect : '/staff', 
+			successRedirect : '/staff/playerlist', 
 			failureRedirect : '/staff', 
 			failureFlash : true 
 		})(req, res);
@@ -45,7 +45,8 @@ module.exports = function(app, passport, moment){
 		.findOne({userId: userId})
 		.exec(function (err, player) {
 
-			//console.log(player);
+			//TODO: handle error properly
+			//if(err)
 
 			res.render('editPlayer.ejs', {
 				user: req.user,
@@ -57,20 +58,19 @@ module.exports = function(app, passport, moment){
 
 	})
 
+	//POST to edit player for staff
 	app.post('/staff/editplayer', isLoggedIn, isStaff, function(req, res) {
 
-		console.log(req.body);
+		//console.log(req.body);
 		var playerId = req.body.playerId;
-
-		var tmpPlayer = new Player();
-		tmpPlayer.firstname = req.body.firstname;
-
 
 		Player
 		.findOne({_id: playerId})
 		.exec(function (err, player) {
 
-			//console.log(player);
+			//TODO: handle error properly
+			//if(err)
+
 			//never want to update the id
 			//TODO: update the user stuff once thats implemented
 			player.firstname = req.body.playerFirstName;
@@ -85,26 +85,40 @@ module.exports = function(app, passport, moment){
 				res.redirect('/staff/playerlist');
 
 			});
-
-			
 		})
-
-
-
 	})
 
-	app.post('/staff/deletePlayer', isLoggedIn, isStaff, function(req, res) {
+	//Pretty greasy to delete on a GET
+	//Deletes the player and user linked to the player
+	app.get('/staff/deletePlayer/:userId', isLoggedIn, isStaff, function(req, res) {
 
+		var userId = req.params.userId;
+
+		Player.remove({userId: userId}, function(err){
+
+			//TODO: handle error properly
+			//if(err)
+
+		})
+
+		User.remove({_id: userId}, function(err) {
+
+			//TODO: handle error properly
+			//if(err)
+		})
+
+		res.redirect('/staff/playerlist');
 		
 	});
 
 	app.get('/staff/playerlist', isLoggedIn, isStaff, function(req, res) {
 
-		//console.log(req.route.path);
-
 		Player
 		.find({})
 		.exec(function (err, players) {
+
+			//TODO: handle error properly
+			//if(err)
 
 			res.render('playerList.ejs', {
 			user: req.user,
@@ -193,8 +207,6 @@ function isLoggedIn(req, res, next) {
 function isStaff(req, res, next) {
 
 	req.logIn(req.user, function(err) {
-
-		//console.log(req.user.admin);
 		if(req.user.admin === true){
 			return next();
 		}else{
