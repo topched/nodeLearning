@@ -23,6 +23,7 @@ Project for learning node.js
 * Add more fields to the player model
 * automate initially creating admin user
 * Make the connect-flash message only show for a brief period of time
+* More robust error handling
 * (more to come)
 
 
