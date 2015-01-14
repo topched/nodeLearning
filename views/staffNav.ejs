@@ -1,0 +1,55 @@
+<nav class="navbar navbar-inverse">
+
+	<div class="navbar-header" id="navheader">
+		<h4>Fake Town Minor Hockey</h4>
+	</div>
+
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href="/logout" id="logout">Logout</a></li>
+	</ul>
+
+</nav>
+
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1>Staff Locker Room</h1>
+		<h3><span class="fa fa-user"></span><%= user.username %></h3>
+	</div>
+
+</div>
+
+
+<div class="col-sm-3">
+	<nav class="nav-sidebar">
+		<ul class="nav nav-pills nav-stacked text-center">
+
+			<% if(path === '/staff') {%>
+				<li class="active" onclick="window.location='/staff'"><a>Staff Home</a></li>
+			<% } else{ %>
+				<li onclick="window.location='/staff'"><a>Staff Home</a></li>
+			<% } %>
+
+			<h4 class="text-center">Players</h4>
+
+			<% if(path === '/staff/playerlist') {%>
+				<li class="active" onclick="window.location='/staff/playerlist'"><a>View All Players</a></li>
+			<% } else{ %>
+				<li onclick="window.location='/staff/playerlist'"><a>View All Players</a></li>
+			<% } %>
+
+			<% if(path === '/staff/createplayer') {%>
+				<li class="active" onclick="window.location='/staff/createplayer'"><a>Add New Player</a></li>
+			<% } else{%>
+				<li onclick="window.location='/staff/createplayer'"><a>Add New Player</a></li>
+			<% } %>
+
+			<% if(path === '/staff/editplayer') {%>
+				<li class="active" onclick="window.location='/staff/editplayer'"><a>Edit Player</a></li>
+			<% } else{ %>
+				<li onclick="window.location='/staff/editplayer'"><a>Edit Player</a></li>
+			<% } %>
+
+		</ul>
+	</nav>
+</div>

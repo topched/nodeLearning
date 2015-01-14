@@ -18,20 +18,63 @@ module.exports = function(app, passport, moment){
 
 	//staff section
 	app.get('/staff', isLoggedIn, isStaff, function(req, res) {
+
 		Player
 		.find({})
 		.exec(function (err, players) {
 
 			res.render('staff.ejs', {
 			user: req.user,
-			players: players,
-			message: req.flash('createMessage') 
+			path: req.route.path
 			});
 			
 		})
 	});
 
-	//player section
+
+	//POST to create a player. Must be loogedIn and Staff
+	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
+		passport.authenticate('local-signup', {
+			successRedirect : '/staff', 
+			failureRedirect : '/staff', 
+			failureFlash : true 
+		})(req, res);
+	});
+
+	app.get('/staff/createplayer', isLoggedIn, isStaff, function(req, res) {
+
+		res.render('createPlayer.ejs', {
+			user: req.user,
+			path: req.route.path
+		});
+	});
+
+	app.get('/staff/editplayer', isLoggedIn, isStaff, function(req, res) {
+
+		res.render('editPlayer.ejs', {
+			user: req.user,
+			path: req.route.path
+		});
+	})
+
+	app.get('/staff/playerlist', isLoggedIn, isStaff, function(req, res) {
+
+		console.log(req.route.path);
+
+		Player
+		.find({})
+		.exec(function (err, players) {
+
+			res.render('viewAllPlayers.ejs', {
+			user: req.user,
+			players: players,
+			path: req.route.path
+			});			
+		})
+
+	});
+
+		//player section
 	app.get('/player', isLoggedIn, function(req, res) {
 
 		res.render('player.ejs', {
@@ -40,32 +83,10 @@ module.exports = function(app, passport, moment){
 
 	});
 
-	//logout
+		//logout
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
-	});
-
-	//POST to create a player. Must be loogedIn and Staff
-	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
-
-		passport.authenticate('local-signup', {
-			successRedirect : '/staff', 
-			failureRedirect : '/staff', 
-			failureFlash : true 
-		})(req, res);
-	});
-
-
-	//retrive JSON representation of all the players
-	app.get('/players/playerlist', isLoggedIn, function(req, res) {
-
-		Player
-		.find({})
-		.exec(function (err, players) {
-			res.json(players);
-		})
-
 	});
 
 
