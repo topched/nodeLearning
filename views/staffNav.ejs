@@ -44,6 +44,20 @@
 				<li onclick="window.location='/staff/createplayer'"><a>Create New Player</a></li>
 			<% } %>
 
+			<h4 class="text-center">Teams</h4>
+
+			<% if(path === '/staff/teamlist') {%>
+				<li class="active" onclick="window.location='/staff/teamlist'"><a>View All Teams</a></li>
+			<% } else{ %>
+				<li onclick="window.location='/staff/teamlist'"><a>View All Teams</a></li>
+			<% } %>
+
+			<% if(path === '/staff/createteam') {%>
+				<li class="active" onclick="window.location='/staff/createteam'"><a>Create New Team</a></li>
+			<% } else{ %>
+				<li onclick="window.location='/staff/createteam'"><a>Create New Team</a></li>
+			<% } %>
+
 			<!--<% if(path === '/staff/editplayer') {%>
 				<li class="active" onclick="window.location='/staff/editplayer'"><a>Edit Player</a></li>
 			<% } else{ %>

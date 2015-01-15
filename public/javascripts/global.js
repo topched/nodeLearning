@@ -18,27 +18,79 @@ function validatePlayerAddForm() {
     }
 }
 
-//remove player from the collection
-function removePlayer(event){
+//Adds a player to the available list
+function addPlayerToAvailable(userId) {
 
-    var confirmation = confirm('Are you sure you want to delete this player?');
+    var html = '';
+    
+    $.ajax({
+        type: 'GET',
+        url: '/staff/player/' + userId
 
-    if(confirmation === true) {
+    }).done(function(resp) {
 
-        $.ajax({
-            type: 'DELETE',
-            url: 'players/deleteplayer/' + $(this).attr('rel')
-        }).done(function(response) {
+        //add player to the available table
+        html += "<tr id='availRow" + userId + "'>";
+        html += "<td><a class='fa fa-plus-square' id='avail" + userId + "'></a></td>";
+        
+        html += '<td>' + resp.firstname + '</td>';
+        html += '<td>' + resp.lastname + '</td>';
 
-            //check response
-            if(response.msg != '') {
-                alert('Error ' + response.msg);
-            }
+        html += '</tr>'
 
-            
+        //update the html
+        $('#availablePlayers table tbody').append(html);
 
+        //add the click listener to remove available player
+        $('#avail' + userId).on("click", function(){
+            addPlayerToRoster(userId);
         });
-    }
-};
+
+        //remove the player from the roster list
+        $('#rosRow' + userId).remove();
+
+    });
+
+}
+
+//Adds a player to the roster list
+function addPlayerToRoster(userId) {
+
+    var html = '';
+    
+    $.ajax({
+        type: 'GET',
+        url: '/staff/player/' + userId
+
+    }).done(function(resp) {
+
+        //add player to teams roster table
+        html += "<tr id='rosRow" + userId + "'>";
+        //html += '<tr>'
+        html += "<td><a class='fa fa-minus-square' id='ros" + userId + "'></a></td>";
+        
+        html += '<td>' + resp.firstname + '</td>';
+        html += '<td>' + resp.lastname + '</td>';
+
+        html += '</tr>'
+
+        //update the html
+        $('#currentTeamRoster table tbody').append(html);
+
+        //add the click listener to remove roster player
+        $('#ros' + userId).on("click", function(){
+            addPlayerToAvailable(userId);
+        });
+
+        //remove the player from the available list
+        $('#availRow' + userId).remove();
+
+    });
+
+
+}
+
+
+
 
 

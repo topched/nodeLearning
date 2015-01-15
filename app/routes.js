@@ -129,6 +129,46 @@ module.exports = function(app, passport, moment){
 
 	});
 
+	app.get('/staff/createteam', isLoggedIn, isStaff, function(req, res) {
+
+		Player
+		.find({})
+		.exec(function (err, players) {
+
+			//TODO: handle error properly
+			//if(err)
+
+			res.render('createTeam.ejs', {
+			user: req.user,
+			path: req.route.path,
+			players: players
+			});
+		
+		})		
+
+
+	});
+
+	//return JSON representation of a player
+	app.get('/staff/player/:userId', isLoggedIn, isStaff, function(req, res) {
+
+		console.log(req.params.userId);
+
+		Player
+		.findOne({userId: req.params.userId})
+		.exec(function (err, player) {
+
+			//TODO: handle error properly
+			//if(err)
+			console.log(player);
+			res.json(player);
+
+		});
+
+		
+
+	});
+
 	//player section
 	app.get('/player', isLoggedIn, function(req, res) {
 
