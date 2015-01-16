@@ -19,12 +19,12 @@ Project for learning node.js
 
 ## TODO
 * Create player page
-* Create teams and link players
 * Add more fields to the player model
 * automate initially creating admin user
 * Add a way to update user information 
 * Add a way to change passwords
 * More robust error handling
+* Player searching and filtering
 * (more to come)
 
 
