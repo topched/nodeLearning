@@ -22,7 +22,6 @@ Project for learning node.js
 * Create teams and link players
 * Add more fields to the player model
 * automate initially creating admin user
-* Fix error between moment and the date object (Lose a day)
 * Add a way to update user information 
 * Add a way to change passwords
 * More robust error handling
