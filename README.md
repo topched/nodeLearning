@@ -12,7 +12,7 @@ Project for learning node.js
 *   4. Start mongo(From wherever you have mongo installed)
 *   5. Switch to nodeLearning
 *   6. Find the user you created in the users collection
-*   7. Change admin from false to true
+*   7. Change admin from false to true -> db.users.update({ username: "Username"},{ $set: {"admin": true}})
 *   8. Recomment the signup link in index.js
 *   9. Restart the app and you will be able to log in with admin credentials
 
