@@ -17,16 +17,7 @@ Project for learning node.js
 *   9. Restart the app and you will be able to log in with admin credentials
 
 
-## TODO
-* Create player page
-* Add more fields to the player model
-* automate initially creating admin user
-* Add a way to update user information 
-* Add a way to change passwords
-* More robust error handling
-* Player searching and filtering
-* Find a test package to use and implement tests
-* (more to come)
+## TODO - See [here](todo.txt)
 
 
 
