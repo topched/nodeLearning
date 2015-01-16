@@ -4,7 +4,7 @@ var User       = require('../app/models/user');
 
 module.exports = function(app, passport, moment){
 
-	//home page with login links
+	//GET index page with login links
 	app.get('/', function(req, res) {
 		res.render('index.ejs');
 	});
@@ -23,7 +23,7 @@ module.exports = function(app, passport, moment){
 	app.post('/staff/createplayer', isLoggedIn, isStaff, function(req, res){
 		passport.authenticate('local-signup', {
 			successRedirect : '/staff/playerlist', 
-			failureRedirect : '/staff', 
+			failureRedirect : '/staff/createplayer', 
 			failureFlash : true 
 		})(req, res);
 	});
@@ -32,7 +32,9 @@ module.exports = function(app, passport, moment){
 	app.get('/staff/createplayer', isLoggedIn, isStaff, function(req, res) {
 		res.render('createPlayer.ejs', {
 			user: req.user,
-			path: req.route.path
+			path: req.route.path,
+			message: req.flash('flashMessage')
+
 		});
 	});
 
@@ -82,6 +84,8 @@ module.exports = function(app, passport, moment){
 				//TODO: handle the error properly
 				if(err) res.redirect('/staff');
 
+				req.flash('flashMessage', 'Player Successfully Changed');
+
 				res.redirect('/staff/playerlist');
 
 			});
@@ -107,10 +111,14 @@ module.exports = function(app, passport, moment){
 			//if(err)
 		})
 
+		req.flash('flashMessage', 'Player Successfully Deleted');
+
+
 		res.redirect('/staff/playerlist');
 		
 	});
 
+	//A list of all the players
 	app.get('/staff/playerlist', isLoggedIn, isStaff, function(req, res) {
 
 		Player
@@ -123,7 +131,9 @@ module.exports = function(app, passport, moment){
 			res.render('playerList.ejs', {
 			user: req.user,
 			players: players,
-			path: req.route.path
+			path: req.route.path,
+			message: req.flash('flashMessage')
+
 			});			
 		})
 
@@ -190,7 +200,7 @@ module.exports = function(app, passport, moment){
 	//==============================
 
 	app.get('/login', function(req, res) {
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('login.ejs', { message: req.flash('flashMessage') });
 	});
 
 	app.post('/login', function(req, res, next) {
@@ -216,7 +226,7 @@ module.exports = function(app, passport, moment){
 
 	//only used to initially create a user
 	app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { message: req.flash('signupMessage') });
+		res.render('signup.ejs', { message: req.flash('flashMessage') });
 	});
 
 	//only used to initially create a user

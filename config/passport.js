@@ -45,10 +45,10 @@ module.exports = function(passport, moment) {
 
                 // if no user is found, return the message
                 if (!user)
-                    return done(null, false, req.flash('loginMessage', 'No user found.'));
+                    return done(null, false, req.flash('flashMessage', 'No user found.'));
 
                 if (!user.validPassword(password))
-                    return done(null, false, req.flash('loginMessage', 'Error logging in'));
+                    return done(null, false, req.flash('flashMessage', 'Error logging in'));
 
                 // all is well, return user
                 else
@@ -81,7 +81,7 @@ module.exports = function(passport, moment) {
             //check to see if that user exists
             if(user) {
                 
-                return done(null, false, req.flash('createMessage', 'Username already exists'));
+                return done(null, false, req.flash('flashMessage', 'Username already exists'));
             
             }else{
 
@@ -117,7 +117,7 @@ module.exports = function(passport, moment) {
                 });
 
 
-                return done(null, req.user), req.flash('createMessage', 'Player Created');
+                return done(null, req.user), req.flash('flashMessage', 'Player Created');
             }
 
         });
