@@ -70,8 +70,8 @@ module.exports = function(passport, moment) {
     },
     function(req, username, password, done) {
 
-        console.log("creating user %s %s", username, password);
-        console.log("creating player %s %s", req.body.playerFirstName, req.body.playerLastName)
+        //console.log("creating user %s %s", username, password);
+        //console.log("creating player %s %s", req.body.playerFirstName, req.body.playerLastName)
 
         User.findOne({ 'username': username}, function(err, user) {
 

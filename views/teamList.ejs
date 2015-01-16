@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+	<title>Staff Locker Room</title>
+
+	<% include headerLinks.ejs %>
+
+	
+</head>
+<body>
+
+	<% include staffNav.ejs %>
+
+
+	<div class="col-sm-9">
+
+		<% if (message.length > 0) { %>
+			<div class="alert alert-success"><%= message %></div>
+		<% } %>
+
+		<div class="teamList" id="teamList">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Team Name</th>
+						<th>Num Players</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				<% for(var i=0; i<teams.length; i++) {%>
+					<tr>
+						<td><%= teams[i].name %></td>
+						<td><%= teams[i].players.length %></td>
+					</tr>
+				<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

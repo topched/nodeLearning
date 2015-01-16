@@ -1,6 +1,7 @@
 
 var Player = require('../app/models/player');
 var User       = require('../app/models/user');
+var Team = require('../app/models/team');
 
 module.exports = function(app, passport, moment){
 
@@ -45,6 +46,8 @@ module.exports = function(app, passport, moment){
 
 		Player
 		.findOne({userId: userId})
+		.populate('userId')
+		.populate('teamId')
 		.exec(function (err, player) {
 
 			//TODO: handle error properly
@@ -66,6 +69,7 @@ module.exports = function(app, passport, moment){
 		//console.log(req.body);
 		var playerId = req.body.playerId;
 
+
 		Player
 		.findOne({_id: playerId})
 		.exec(function (err, player) {
@@ -77,7 +81,8 @@ module.exports = function(app, passport, moment){
 			//TODO: update the user stuff once thats implemented
 			player.firstname = req.body.playerFirstName;
 			player.lastname = req.body.playerLastName;
-			player.birthdate = req.body.playerBirthDate;
+			//+1 fixes losing a day bug
+			player.birthdate = req.body.playerBirthDate+1;
 
 			player.save(function(err) {
 
@@ -123,6 +128,8 @@ module.exports = function(app, passport, moment){
 
 		Player
 		.find({})
+		.populate('teamId')
+		.populate('userId')
 		.exec(function (err, players) {
 
 			//TODO: handle error properly
@@ -133,8 +140,8 @@ module.exports = function(app, passport, moment){
 			players: players,
 			path: req.route.path,
 			message: req.flash('flashMessage')
+			});
 
-			});			
 		})
 
 	});
@@ -159,10 +166,75 @@ module.exports = function(app, passport, moment){
 
 	});
 
+	//creates a new team and updates all the selected players teamId
+	app.post('/staff/createteam', isLoggedIn, isStaff, function(req, res) {
+
+		//ids to be added to the team
+		var ids = req.body.id;
+		var teamName = req.body.teamName;
+
+		//create the team		
+		var newTeam = new Team();
+
+		newTeam.name = teamName;
+		newTeam.players = ids;
+
+		newTeam.save(function(err) {
+			//TODO handle error
+			//if(err)
+		});
+
+		//check needed because a single element could be returned and 
+		//that throws off the length of ids
+		if(ids instanceof Array) {
+			
+			//update for a list of ids
+			for(var i=0; i<ids.length; i++) {
+
+				var q = {userId: ids[i]};
+				Player.update(q, {teamId: newTeam._id}, function(err){
+					//TODO handle error
+					//if(err)
+				});
+			}
+
+		}else{
+
+			//only need to update a single id
+			var q = {userId: ids};
+			Player.update(q, {teamId: newTeam._id}, function(err){
+				//TODO handle error
+				//if(err)
+			});
+
+		}
+
+		req.flash('flashMessage', 'Team Created');
+		res.redirect('/staff/teamlist');
+	});
+
+	app.get('/staff/teamlist', isLoggedIn, isStaff, function(req, res) {
+
+		Team
+		.find({})
+		.exec(function(err, teams) {
+
+			res.render('teamList.ejs', {
+				user: req.user,
+				teams: teams,
+				message: req.flash('flashMessage'),
+				path: req.route.path
+			});
+
+		});
+
+
+	})
+
 	//return JSON representation of a player
 	app.get('/staff/player/:userId', isLoggedIn, isStaff, function(req, res) {
 
-		console.log(req.params.userId);
+		//console.log(req.params.userId);
 
 		Player
 		.findOne({userId: req.params.userId})
@@ -170,10 +242,10 @@ module.exports = function(app, passport, moment){
 
 			//TODO: handle error properly
 			//if(err)
-			console.log(player);
+			//console.log(player);
 			res.json(player);
 
-		});
+		})
 
 		
 

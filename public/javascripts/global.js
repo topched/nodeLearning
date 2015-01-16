@@ -18,6 +18,7 @@ function validatePlayerAddForm() {
     }
 }
 
+
 //Adds a player to the available list
 function addPlayerToAvailable(userId) {
 
@@ -71,6 +72,8 @@ function addPlayerToRoster(userId) {
         
         html += '<td>' + resp.firstname + '</td>';
         html += '<td>' + resp.lastname + '</td>';
+
+        html += "<input type='hidden' name='id' value='" + userId + "'>";
 
         html += '</tr>'
 

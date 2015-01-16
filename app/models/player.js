@@ -8,7 +8,7 @@ var playerSchema = mongoose.Schema({
 	lastname : String,
 	birthdate : {type: Date},
 	userId : {type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null},
-	username : {type: String, ref: 'User', default: null}
+	teamId: {type: mongoose.Schema.Types.ObjectId, ref: 'Team', default: null}
 });
 
 module.exports = mongoose.model('Player', playerSchema);
