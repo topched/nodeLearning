@@ -25,6 +25,7 @@ Project for learning node.js
 * Add a way to change passwords
 * More robust error handling
 * Player searching and filtering
+* Find a test package to use and implement tests
 * (more to come)
 
 
