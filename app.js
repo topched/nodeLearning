@@ -48,8 +48,8 @@ app.locals.formatDateForForm = function(date) {
 	return moment(date).format('YYYY-MM-DD');
 }
 
-//load routes + pass in app, passport, moment
-require('./app/routes')(app, passport, moment);
+//load routes + pass in app, passport
+require('./app/routes')(app, passport);
 
 
 //TODO: add in proper error handlers

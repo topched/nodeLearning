@@ -3,7 +3,7 @@ var Player = require('../app/models/player');
 var User       = require('../app/models/user');
 var Team = require('../app/models/team');
 
-module.exports = function(app, passport, moment){
+module.exports = function(app, passport){
 
 	//GET index page with login links
 	app.get('/', function(req, res) {
