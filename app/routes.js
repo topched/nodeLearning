@@ -146,10 +146,11 @@ module.exports = function(app, passport){
 
 	});
 
+	//get all available players only
 	app.get('/staff/createteam', isLoggedIn, isStaff, function(req, res) {
 
 		Player
-		.find({})
+		.find({teamId: null})
 		.exec(function (err, players) {
 
 			//TODO: handle error properly
