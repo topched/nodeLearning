@@ -35,13 +35,13 @@
 				<% for(var i=0; i<players.length; i++) {%>
 					<tr>
 						<td>
-							<a href="editplayer/<%= players[i].userId._id %>" ><i class="fa fa-pencil-square-o fa-fw"></i></a>
+							<a href="editplayer/<%= players[i]._id %>" ><i class="fa fa-pencil-square-o fa-fw"></i></a>
 							<a href="deleteplayer/<%= players[i].userId._id %>"><i class="fa fa-trash-o fa-fw"></i></a>
 						</td>
 						<td><%= players[i].userId.username %></td>
 						<td><%= players[i].firstname %></td>
 						<td><%= players[i].lastname %></td>
-						<td><%= formatDateForForm(players[i].birthdate) %></td>
+						<td><%= formatDate(players[i].birthdate) %></td>
 
 						<% if(players[i].teamId === null) {%>
 							<td>N/A</td>

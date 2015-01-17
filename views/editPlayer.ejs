@@ -14,8 +14,12 @@
 
 	<div class="col-sm-9">
 
+		<% if (message.length > 0) { %>
+			<div class="alert alert-danger"><%= message %></div>
+		<% } %>
 
-		<form class="form-horizontal" id="addPlayer" onsubmit="return validatePlayerAddForm()" action="/staff/editplayer" method="post">
+
+		<form class="form-horizontal" id="addPlayer" onsubmit="return validatePlayerAddForm()" action="/staff/editplayer/<%= player._id %>" method="post">
 
 			<!-- TODO: update username and password. Might want to do this another way
 			<div class="form-group">
@@ -52,7 +56,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="playerBirthDate">Date Of Birth</label>
 				<div class="col-sm-4">
-					<input class="form-control inputForm" type="date" name="playerBirthDate" value="<%= formatDateForForm(player.birthdate) %>">
+					<input class="form-control inputForm" type="date" name="playerBirthDate" value="<%= formatDate(player.birthdate) %>">
 				</div>
 			</div>
 

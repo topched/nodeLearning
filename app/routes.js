@@ -40,12 +40,12 @@ module.exports = function(app, passport){
 	});
 
 	//GET edit player page for staff
-	app.get('/staff/editplayer/:userId', isLoggedIn, isStaff, function(req, res) {
+	app.get('/staff/editplayer/:playerId', isLoggedIn, isStaff, function(req, res) {
 
-		var userId = req.params.userId;
+		var playerId = req.params.playerId;
 
 		Player
-		.findOne({userId: userId})
+		.findOne({_id: playerId})
 		.populate('userId')
 		.populate('teamId')
 		.exec(function (err, player) {
@@ -56,7 +56,8 @@ module.exports = function(app, passport){
 			res.render('editPlayer.ejs', {
 				user: req.user,
 				player: player,
-				path: req.route.path
+				path: req.route.path,
+				message: req.flash('flashMessage')
 			});
 
 		})
@@ -64,52 +65,42 @@ module.exports = function(app, passport){
 	})
 
 	//POST to edit player for staff
-	app.post('/staff/editplayer', isLoggedIn, isStaff, function(req, res) {
+	app.post('/staff/editplayer/:playerId', isLoggedIn, isStaff, function(req, res) {
 
-		//console.log(req.body);
-		var playerId = req.body.playerId;
+		//console.log(req);
+		var playerId = req.params.playerId;
+		var first = req.body.playerFirstName;
+		var last = req.body.playerLastName;
+		var date = req.body.playerBirthDate;
 
+		var conditions = {_id: playerId};
+		var update = {firstname: first, lastname: last, birthdate: date};
+		Player.update(conditions, update, function(err, numAffected) {
 
-		Player
-		.findOne({_id: playerId})
-		.exec(function (err, player) {
+			if(err) {
+				req.flash('flashMessage', 'Error Editing Player');
+				res.redirect('/staff/editplayer/' + playerId);
+			}
 
-			//TODO: handle error properly
-			//if(err)
-
-			//never want to update the id
-			//TODO: update the user stuff once thats implemented
-			player.firstname = req.body.playerFirstName;
-			player.lastname = req.body.playerLastName;
-			//+1 fixes losing a day bug
-			player.birthdate = req.body.playerBirthDate+1;
-
-			player.save(function(err) {
-
-				//TODO: handle the error properly
-				if(err) res.redirect('/staff');
-
-				req.flash('flashMessage', 'Player Successfully Changed');
-
-				res.redirect('/staff/playerlist');
-
-			});
-		})
+			req.flash('flashMessage', 'Player Successfully Changed');
+			res.redirect('/staff/playerlist');
+		});
 	})
 
-	//Pretty greasy to delete on a GET
+	//Using userId instead of playerId so we can delete both in 1 shot w/o extra query
 	//Deletes the player and user linked to the player
 	app.get('/staff/deletePlayer/:userId', isLoggedIn, isStaff, function(req, res) {
 
 		var userId = req.params.userId;
 
+		//remove the player
 		Player.remove({userId: userId}, function(err){
 
 			//TODO: handle error properly
 			//if(err)
-
 		})
 
+		//remove the user
 		User.remove({_id: userId}, function(err) {
 
 			//TODO: handle error properly
@@ -117,8 +108,6 @@ module.exports = function(app, passport){
 		})
 
 		req.flash('flashMessage', 'Player Successfully Deleted');
-
-
 		res.redirect('/staff/playerlist');
 		
 	});
@@ -245,12 +234,10 @@ module.exports = function(app, passport){
 
 			//TODO: handle error properly
 			//if(err)
-			//console.log(player);
+
 			res.json(player);
 
 		})
-
-		
 
 	});
 

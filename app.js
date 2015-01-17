@@ -39,13 +39,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-//function to use moment to format the date
-app.locals.formatDateForHuman = function(date) {
-	return moment(date).format('MMMM Do YYYY');
-}
-
-app.locals.formatDateForForm = function(date) {
-	return moment(date).format('YYYY-MM-DD');
+//Used to formate date
+app.locals.formatDate = function(date) {
+	return moment(date).add(1, 'days').format('YYYY-MM-DD');
 }
 
 //load routes + pass in app, passport
