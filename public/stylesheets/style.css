@@ -6,6 +6,7 @@
 #logout {
 	margin-right: 15px;
 	color: white;
+    background-color: #337ab7; 
 }
 
 .nav-pills {
@@ -16,6 +17,13 @@
     width: 100%; 
     border-right: 1px solid #ddd;
 }
+
+.navbar {
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+
 
 .hidden {
 	display: none;

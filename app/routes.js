@@ -177,6 +177,8 @@ module.exports = function(app, passport){
 		//create the team		
 		var newTeam = new Team();
 
+		//TODO - check if the team name already exists in the division
+
 		newTeam.name = teamName;
 		newTeam.players = ids;
 
