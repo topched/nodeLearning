@@ -7,4 +7,5 @@ TODO List
 * More robust error handling
 * Player searching and filtering
 * Find a test package to use and implement tests
+* Remove player from team when player is deleted
 * (more to come)

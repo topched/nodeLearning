@@ -176,8 +176,10 @@ module.exports = function(app, passport){
 			//if(err)
 		});
 
-		//check needed because a single element could be returned and 
-		//that throws off the length of ids
+		/*
+			check needed because request could contain a single id
+			and that throws off the length 
+		*/
 		if(ids instanceof Array) {
 			
 			//update for a list of ids
