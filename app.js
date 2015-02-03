@@ -7,21 +7,32 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var moment = require('moment');
 var ejs = require('ejs');
-var http = require('http');
+var uriUtil = require('mongodb-uri');
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-var uristring = 
-	process.env.MONGOLAB_URI ||
-	process.env.MONGOHQ_URL ||
-	'mongodb://localhost:27017/nodeLearning';
+
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
+
+
+if(process.env.MONGOLAB_URI !== undefined) {
+	var uristring = uriUtil.formatMongoose(process.env.MONGOLAB_URI);
+}else {
+	var uristring = 'mongodb://localhost:27017/nodeLearning';
+}
+
+//var uristring = 
+//	process.env.MONGOLAB_URI ||
+//	process.env.MONGOHQ_URL ||
+//	'mongodb://localhost:27017/nodeLearning';
 
 //setting up the db
 //mongoose.connect('mongodb://localhost:27017/nodeLearning');
-mongoose.connect(uristring, function (err, res) {
+mongoose.connect(uristring, options, function (err, res) {
 
 	if(err) {
 		console.log('Error connecting to: ' + uristring + '.' + err);

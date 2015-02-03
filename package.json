@@ -11,6 +11,8 @@
     "connect-flash" : "~0.1.1",   
     "bcrypt-nodejs" : "latest",
 
+    "mongodb-uri" : "latest",
+
     "morgan": "~1.0.0",
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.0",
