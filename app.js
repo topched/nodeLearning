@@ -7,15 +7,31 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var moment = require('moment');
 var ejs = require('ejs');
+var http = require('http');
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var uristring = 
+	process.env.MONGOLAB_URI ||
+	process.env.MONGOHQ_URL ||
+	'mongodb://localhost:27017/nodeLearning';
 
 //setting up the db
-mongoose.connect('mongodb://localhost:27017/nodeLearning');
+//mongoose.connect('mongodb://localhost:27017/nodeLearning');
+mongoose.connect(uristring, function (err, res) {
+
+	if(err) {
+		console.log('Error connecting to: ' + uristring + '.' + err);
+	}else{
+		console.log('Succeded connecting to: ' + uristring);
+	}
+
+});
+
+
 
 //configure passport
 require('./config/passport')(passport, moment);
