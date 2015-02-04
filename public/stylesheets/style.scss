@@ -1,6 +1,12 @@
-@border-radius-base:        0px;
-@border-radius-large:       0px;
-@border-radius-small:       0px;
+@font-face {
+  font-family: Bebas;
+  src: url('../public/fonts/BebasNeue.otf');
+}
+
+@font-face {
+  font-family: Code;
+  src: url('../public/fonts/CODE Bold.otf');
+}
 
 /* Variables */
 $colorScheme1: #594F4F;
@@ -9,42 +15,47 @@ $colorScheme3: #45ADA8;
 $colorScheme4: #9DE0AD;
 $colorScheme5: #E5FCC2;
 
+$chasmBlue: #1B3966;
+$offYellow: #CEC534;
+$lightBrown: #BE8431;
+
 $headerHeight: 60px;
 
-/*      Header
+/*      Nav headers
 -------------------------------------------------------------- */
 header {
     width: 100%;
     height: $headerHeight;
     overflow: hidden;
+    font-family: Code;
     top: 0;
     left: 0;
-    background-color: $colorScheme3;
+    background-color: $chasmBlue;
     text-align: center;
 }
 
 header h1#logo {
     display: inline-block;
+    font-family: Code;
     font-size: 40px;
     margin-top: 0px;
     padding-left: 5px;
 }
-header h1 a { color: $colorScheme1; }
 
-
-
+header h1 a { color: $lightBrown; }
+header a:hover {text-decoration: none; color:white;}
+a#logout:hover {color:white;}
 
 header a#logout {
-
+    font-family: Bebas;
     display: inline-block;
     position: relative;
     float: right;
     padding-right: 10px; 
     line-height: $headerHeight;
-    color: $colorScheme1;
-    font-size: 20px;
+    color: $lightBrown;
+    font-size: 18px;
     z-index:999;
-
 }
 
 .brand {
@@ -58,40 +69,69 @@ header a#logout {
 
 
 .local-nav {
-
     width: 100%;
-    background-color: $colorScheme3;
+    background-color: $lightBrown;
     padding-bottom: 10px;
+    padding-top: 5px;
 }
 
 .local-nav a {
-    color: $colorScheme1;
+    font-family: Code;
+    color: white;
     font-size: 20px;
-    padding-right: 5px;
-    border-right: 1px solid;
+    padding-right: 10px;
+    text-shadow: -1px 0 $chasmBlue, 0 1px $chasmBlue, 1px 0 $chasmBlue, 0 -1px $chasmBlue;
+
 }
 
-.local-nav a:last-child {
-    border-right: none;
+.local-nav a:hover, .local-nav a:active {
+    color: $chasmBlue;
+    text-shadow: none;
+    text-decoration: none;
+}
+
+/*  /NavHeaders
+-------------------------------------------------------------- */
+
+/* index splash page and login
+-------------------------------------------------------------- */
+.homepage .jumbotron  {
+
+    background-color: $chasmBlue;
+    margin-top: 50px;
+
+    h1 { color: $lightBrown; }
+    a {background-color: lighten($lightBrown, 10%); color: $chasmBlue; }
+    a:hover {background-color: $lightBrown; }
+}
+
+.login {
+
+    background-color: $chasmBlue;
+    color: $lightBrown;
+    margin-top: 80px;
+
+    button {
+        background-color: lighten($lightBrown, 10%);
+        color: $chasmBlue;
+        margin-bottom: 10px;
+    }
+    button:hover {
+        background-color: $lightBrown;
+    }
 }
 
 
-
-
-.nav-pills {
-	padding-right: 5px;
-}
-
-.nav-sidebar { 
-    width: 100%; 
-    border-right: 1px solid #ddd;
-}
+/* /index splash page
+-------------------------------------------------------------- */
 
 .center {
     text-align: center;
 }
 
-
+.main {
+    padding-top: 50px;
+}
 .hidden {
 	display: none;
 }

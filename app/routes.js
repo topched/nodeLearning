@@ -13,10 +13,22 @@ module.exports = function(app, passport){
 	//GET staff home page
 	app.get('/staff', isLoggedIn, isStaff, function(req, res) {
 
-		res.render('staff.ejs', {
-		user: req.user,
-		path: req.route.path
-		});
+		var numP, numT = 0;
+		Player.find({}).exec(function (err, players) {
+			numP = players.length;
+
+			Team.find({}).exec(function (err, teams) {
+				numT = teams.length;
+
+					res.render('staff.ejs', {
+					user: req.user,
+					path: req.route.path,
+					numPlayers: numP,
+					numTeams: numT
+					});
+			});
+
+		})
 			
 	});
 

@@ -1,35 +1,48 @@
-@border-radius-base :        0px;
-@border-radius-large :       0px;
-@border-radius-small :       0px;
+@font-face {
+  font-family: Bebas;
+  src: url("../public/fonts/BebasNeue.otf"); }
+@font-face {
+  font-family: Code;
+  src: url("../public/fonts/CODE Bold.otf"); }
 /* Variables */
-/*      Header
+/*      Nav headers
 -------------------------------------------------------------- */
 header {
   width: 100%;
   height: 60px;
   overflow: hidden;
+  font-family: Code;
   top: 0;
   left: 0;
-  background-color: #45ADA8;
+  background-color: #1B3966;
   text-align: center; }
 
 header h1#logo {
   display: inline-block;
+  font-family: Code;
   font-size: 40px;
   margin-top: 0px;
   padding-left: 5px; }
 
 header h1 a {
-  color: #594F4F; }
+  color: #BE8431; }
+
+header a:hover {
+  text-decoration: none;
+  color: white; }
+
+a#logout:hover {
+  color: white; }
 
 header a#logout {
+  font-family: Bebas;
   display: inline-block;
   position: relative;
   float: right;
   padding-right: 10px;
   line-height: 60px;
-  color: #594F4F;
-  font-size: 20px;
+  color: #BE8431;
+  font-size: 18px;
   z-index: 999; }
 
 .brand {
@@ -42,27 +55,55 @@ header a#logout {
 
 .local-nav {
   width: 100%;
-  background-color: #45ADA8;
-  padding-bottom: 10px; }
+  background-color: #BE8431;
+  padding-bottom: 10px;
+  padding-top: 5px; }
 
 .local-nav a {
-  color: #594F4F;
+  font-family: Code;
+  color: white;
   font-size: 20px;
-  padding-right: 5px;
-  border-right: 1px solid; }
+  padding-right: 10px;
+  text-shadow: -1px 0 #1B3966, 0 1px #1B3966, 1px 0 #1B3966, 0 -1px #1B3966; }
 
-.local-nav a:last-child {
-  border-right: none; }
+.local-nav a:hover, .local-nav a:active {
+  color: #1B3966;
+  text-shadow: none;
+  text-decoration: none; }
 
-.nav-pills {
-  padding-right: 5px; }
+/*  /NavHeaders
+-------------------------------------------------------------- */
+/* index splash page and login
+-------------------------------------------------------------- */
+.homepage .jumbotron {
+  background-color: #1B3966;
+  margin-top: 50px; }
+  .homepage .jumbotron h1 {
+    color: #BE8431; }
+  .homepage .jumbotron a {
+    background-color: #d29d50;
+    color: #1B3966; }
+  .homepage .jumbotron a:hover {
+    background-color: #BE8431; }
 
-.nav-sidebar {
-  width: 100%;
-  border-right: 1px solid #ddd; }
+.login {
+  background-color: #1B3966;
+  color: #BE8431;
+  margin-top: 80px; }
+  .login button {
+    background-color: #d29d50;
+    color: #1B3966;
+    margin-bottom: 10px; }
+  .login button:hover {
+    background-color: #BE8431; }
 
+/* /index splash page
+-------------------------------------------------------------- */
 .center {
   text-align: center; }
+
+.main {
+  padding-top: 50px; }
 
 .hidden {
   display: none; }
