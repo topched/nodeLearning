@@ -1,21 +1,12 @@
 # nodeLearning
 
-Project for learning node.js
+Project for learning node.js. This project is under continuous development and new features are being added frequently. You can use the player credentials to log in. The staff credentials are private, if you wish to have some feel free to message.
 
-## Basic Setup Instructions:
-* Create a local instance of mongoDB inside /data
-* Run command npm install
-* Manually create a admin user(TODO: automate this process)
-*   1. Uncomment signup link in index.js
-*   2. Start app with node app.js then navigate to localhost:8080 
-*   3. Fill in form and create user(NOTE: this will create an undefined player. Will be fixed when the TODO above is complete)
-*   4. Start mongo(From wherever you have mongo installed)
-*   5. Switch to nodeLearning
-*   6. Find the user you created in the users collection
-*   7. Change admin from false to true -> db.users.update({ username: "Username"},{ $set: {"admin": true}})
-*   8. Recomment the signup link in index.js
-*   9. Restart the app and you will be able to log in with admin credentials
+### Player Credentials
+#### Username: Demo
+#### Password: Demo
 
+Hosted on heroku at topched.herokuapp.com
 
 ## TODO - See [here](todo.txt)
 
