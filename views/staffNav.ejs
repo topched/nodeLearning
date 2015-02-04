@@ -1,14 +1,38 @@
-<nav class="navbar">
+<!--<nav class="navbar">
 
-	<div class="navbar-header" id="navheader">
-		<h4>Fake Town Minor Hockey</h4>
-	</div>
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>    
+  </div>
+  <a class="navbar-brand" href="#">Fake Town Sports</a>
 
 	<ul class="nav navbar-nav navbar-right">
 		<li><a href="/logout" id="logout">Logout</a></li>
 	</ul>
 
-</nav>
+
+
+</nav>-->
+<header>
+	<h1 id="logo"><a class="brand" href="/staff">Fake Town Sports League</a></h1>
+	<a id="logout" href="/logout">Logout</a>
+	
+
+</header>
+
+	<div class="local-nav brand">
+
+		<a href="/staff/playerlist">View Players</a>
+		<a href="/staff/createplayer">Create Player</a>
+		<a href="/staff/teamlist">View Teams</a>
+		<a href="/staff/createteam">Create Team</a>
+
+	</div>
+
+
 
 <div class="container">
 
@@ -20,50 +44,3 @@
 </div>
 
 
-<div class="col-sm-3">
-	<nav class="nav-sidebar">
-		<ul class="nav nav-pills nav-stacked text-center">
-
-			<% if(path === '/staff') {%>
-				<li class="active" onclick="window.location='/staff'"><a>Staff Home</a></li>
-			<% } else{ %>
-				<li onclick="window.location='/staff'"><a>Staff Home</a></li>
-			<% } %>
-
-			<h4 class="text-center">Players</h4>
-
-			<% if(path === '/staff/playerlist') {%>
-				<li class="active" onclick="window.location='/staff/playerlist'"><a>View All Players</a></li>
-			<% } else{ %>
-				<li onclick="window.location='/staff/playerlist'"><a>View All Players</a></li>
-			<% } %>
-
-			<% if(path === '/staff/createplayer') {%>
-				<li class="active" onclick="window.location='/staff/createplayer'"><a>Create New Player</a></li>
-			<% } else{%>
-				<li onclick="window.location='/staff/createplayer'"><a>Create New Player</a></li>
-			<% } %>
-
-			<h4 class="text-center">Teams</h4>
-
-			<% if(path === '/staff/teamlist') {%>
-				<li class="active" onclick="window.location='/staff/teamlist'"><a>View All Teams</a></li>
-			<% } else{ %>
-				<li onclick="window.location='/staff/teamlist'"><a>View All Teams</a></li>
-			<% } %>
-
-			<% if(path === '/staff/createteam') {%>
-				<li class="active" onclick="window.location='/staff/createteam'"><a>Create New Team</a></li>
-			<% } else{ %>
-				<li onclick="window.location='/staff/createteam'"><a>Create New Team</a></li>
-			<% } %>
-
-			<!--<% if(path === '/staff/editplayer') {%>
-				<li class="active" onclick="window.location='/staff/editplayer'"><a>Edit Player</a></li>
-			<% } else{ %>
-				<li onclick="window.location='/staff/editplayer'"><a>Edit Player</a></li>
-			<% } %>-->
-
-		</ul>
-	</nav>
-</div>

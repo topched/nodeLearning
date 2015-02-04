@@ -1,0 +1,128 @@
+@border-radius-base:        0px;
+@border-radius-large:       0px;
+@border-radius-small:       0px;
+
+/* Variables */
+$colorScheme1: #594F4F;
+$colorScheme2: #547980;
+$colorScheme3: #45ADA8;
+$colorScheme4: #9DE0AD;
+$colorScheme5: #E5FCC2;
+
+$headerHeight: 60px;
+
+/*      Header
+-------------------------------------------------------------- */
+header {
+    width: 100%;
+    height: $headerHeight;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    background-color: $colorScheme3;
+    text-align: center;
+}
+
+header h1#logo {
+    display: inline-block;
+    font-size: 40px;
+    margin-top: 0px;
+    padding-left: 5px;
+}
+header h1 a { color: $colorScheme1; }
+
+
+
+
+header a#logout {
+
+    display: inline-block;
+    position: relative;
+    float: right;
+    padding-right: 10px; 
+    line-height: $headerHeight;
+    color: $colorScheme1;
+    font-size: 20px;
+    z-index:999;
+
+}
+
+.brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    z-index:1;
+}
+
+
+.local-nav {
+
+    width: 100%;
+    background-color: $colorScheme3;
+    padding-bottom: 10px;
+}
+
+.local-nav a {
+    color: $colorScheme1;
+    font-size: 20px;
+    padding-right: 5px;
+    border-right: 1px solid;
+}
+
+.local-nav a:last-child {
+    border-right: none;
+}
+
+
+
+
+.nav-pills {
+	padding-right: 5px;
+}
+
+.nav-sidebar { 
+    width: 100%; 
+    border-right: 1px solid #ddd;
+}
+
+.center {
+    text-align: center;
+}
+
+
+.hidden {
+	display: none;
+}
+
+.inputForm {
+	margin-bottom: 5px;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.alert {
+
+    animation:alert-fade 2s;
+    -webkit-animation:alert-fade 2s;
+    animation-fill-mode: forwards;
+    
+    animation-delay:2s;
+    -webkit-animation-delay:2s; /* Safari and Chrome */
+    -webkit-animation-fill-mode: forwards;
+
+}
+
+label {
+	margin-right: 5px;
+}
+
+@-webkit-keyframes alert-fade{
+    0%   {opacity: 1;}
+    30% {opacity: 0.8;-webkit-transform: translateY(0px);margin-top:0px;}
+    50% {opacity: 0}
+    100% {opacity: 0;-webkit-transform: translateY(-30px);margin-top:-70px;}/* rough hack for size of alert */
+}

@@ -1,0 +1,58 @@
+/* Variables */
+#navheader {
+  color: white;
+  margin-left: 10px; }
+
+#logout {
+  margin-right: 15px;
+  color: white;
+  background-color: #337ab7; }
+
+.nav-pills {
+  padding-right: 5px; }
+
+.nav-sidebar {
+  width: 100%;
+  border-right: 1px solid #ddd; }
+
+.navbar {
+  background-color: #FF9900;
+  border-color: #337ab7; }
+
+.hidden {
+  display: none; }
+
+.inputForm {
+  margin-bottom: 5px; }
+
+.form-actions {
+  text-align: center; }
+
+.alert {
+  animation: alert-fade 2s;
+  -webkit-animation: alert-fade 2s;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+  -webkit-animation-delay: 2s;
+  /* Safari and Chrome */
+  -webkit-animation-fill-mode: forwards; }
+
+label {
+  margin-right: 5px; }
+
+@-webkit-keyframes alert-fade {
+  0% {
+    opacity: 1; }
+  30% {
+    opacity: 0.8;
+    -webkit-transform: translateY(0px);
+    margin-top: 0px; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-30px);
+    margin-top: -70px; }
+  /* rough hack for size of alert */ }
+
+/*# sourceMappingURL=output.css.map */

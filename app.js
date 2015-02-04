@@ -8,30 +8,28 @@ var flash = require('connect-flash');
 var moment = require('moment');
 var ejs = require('ejs');
 var uriUtil = require('mongodb-uri');
-
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-
+/* 
+ * Mongoose by default sets the auto_reconnect option to true.
+ * We recommend setting socket options at both the server and replica set level.
+ * We recommend a 30 second connection timeout because it allows for 
+ * plenty of time in most operating environments.
+ */
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 
 
+//Setting up the db connection string for both local and heroku
 if(process.env.MONGOLAB_URI !== undefined) {
 	var uristring = uriUtil.formatMongoose(process.env.MONGOLAB_URI);
 }else {
 	var uristring = 'mongodb://localhost:27017/nodeLearning';
 }
 
-//var uristring = 
-//	process.env.MONGOLAB_URI ||
-//	process.env.MONGOHQ_URL ||
-//	'mongodb://localhost:27017/nodeLearning';
-
-//setting up the db
-//mongoose.connect('mongodb://localhost:27017/nodeLearning');
 mongoose.connect(uristring, options, function (err, res) {
 
 	if(err) {
@@ -41,8 +39,6 @@ mongoose.connect(uristring, options, function (err, res) {
 	}
 
 });
-
-
 
 //configure passport
 require('./config/passport')(passport, moment);
